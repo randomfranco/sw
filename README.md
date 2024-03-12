@@ -18,7 +18,7 @@ sudo make install
 ```
 
 ## commands
-While running you che use the following commands:
+While running you can use the following commands:
 - `S` or `s` to stop / start the stopwatch
 - `R` or `r` to reset the stopwatch
 - `<space>` to record time
