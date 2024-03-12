@@ -10,7 +10,6 @@ void sw_init(struct stopwatch *sw){
 	gettimeofday(&sw->tv, NULL);
 	sw->acc.tv_sec = 0;
 	sw->acc.tv_usec = 0;
-	sw->running=1;
 
 	for(int i=0; i < sw->nstops; i++){
 		sw->stops[i].tv_sec=0;
@@ -73,6 +72,7 @@ void sw_run(struct stopwatch *sw){
 	char c = 0;
 	char buffer[16];
 
+	sw->running=1;
 	for(;;){
 		if (read(STDIN_FILENO, &c, 1))
 			switch(c){
