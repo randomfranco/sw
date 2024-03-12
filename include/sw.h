@@ -3,7 +3,10 @@
 
 #include <sys/time.h>
 
+#ifndef MAXSTOPS
 #define MAXSTOPS 64
+#endif
+
 #define SWITCH(running) ((running) == 0 ? 1 : 0)
 
 struct stopwatch{

@@ -1,6 +1,6 @@
 TARGET = sw
 CC = gcc
-CFLAGS = -Iinclude
+CFLAGS = -Iinclude -DMAX_STOPS=64
 
 INSTALL_DIR = /usr/bin
 
@@ -16,6 +16,4 @@ clean:
 install: $(TARGET)
 	    cp $(TARGET) $(INSTALL_DIR)
 
-.PHONY: clean
-
-
+.PHONY: clean install
