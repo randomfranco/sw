@@ -66,9 +66,16 @@ void timeval_formatstr(struct timeval tv, char *str){
 
 }
 
+
+void sw_stop(struct stopwatch *sw){
+	sw->running = SWITCH(sw->running);
+	gettimeofday(&sw->tv, NULL);
+	sw->tv.tv_sec -= sw->acc.tv_sec;
+	sw->tv.tv_usec -= sw->acc.tv_usec > 0 ? sw->acc.tv_usec : -sw->acc.tv_usec;
+}
+
 void sw_run(struct stopwatch *sw){
 
-	int err;
 	char c = 0;
 	char buffer[16];
 
@@ -82,10 +89,7 @@ void sw_run(struct stopwatch *sw){
 				break;
 				case 'S':
 				case 's':
-				sw->running = SWITCH(sw->running);
-				err = gettimeofday(&sw->tv, NULL);
-				sw->tv.tv_sec -= sw->acc.tv_sec;
-				sw->tv.tv_usec -= sw->acc.tv_usec > 0 ? sw->acc.tv_usec : -sw->acc.tv_usec;
+				sw_stop(sw);
 				break;
 				case ' ':
 				sw_rectime(sw);

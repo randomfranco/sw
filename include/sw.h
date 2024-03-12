@@ -18,6 +18,7 @@ void sw_init(struct stopwatch *sw);
 void sw_update(struct stopwatch *sw);
 void sw_reset(struct stopwatch *sw);
 void sw_show(struct stopwatch *sw);
+void sw_stop(struct stopwatch *sw);
 void sw_run(struct stopwatch *sw);
 void timeval_formatstr(struct timeval tv, char *str);
 
