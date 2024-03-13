@@ -85,22 +85,23 @@ void sw_run(struct stopwatch *sw){
 			switch(c){
 				case 'R':
 				case 'r':
-				sw_reset(sw);
-				break;
+					sw_reset(sw);
+					break;
 				case 'S':
 				case 's':
-				sw_stop(sw);
-				break;
+					sw_stop(sw);
+					break;
 				case ' ':
-				sw_rectime(sw);
-				sw_show(sw);
-				break;
+					sw_rectime(sw);
+					sw_show(sw);
+					break;
 				case 'q':
 				case 'Q':
-				printf("\n");
-				return;
+					printf("\n");
+					return;
 				break;
 			}
+
 		if (sw->running)
 			sw_update(sw);
 
