@@ -97,9 +97,8 @@ void sw_run(struct stopwatch *sw){
 					break;
 				case 'q':
 				case 'Q':
-					printf("\n");
-					return;
-				break;
+					exit(EXIT_SUCCESS);
+					break;
 			}
 
 		if (sw->running)

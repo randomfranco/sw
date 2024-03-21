@@ -11,6 +11,13 @@ void termios_init(struct termios *original_settings){
 	tcsetattr(STDIN_FILENO, TCSANOW, &new_settings);
 }
 
-void termios_restore(struct termios *original_settings){
+// we dont need outside termios_helper.c, since we use the wrapper
+static void termios_restore(struct termios *original_settings){
 	tcsetattr(STDIN_FILENO, TCSANOW, original_settings);
+}
+
+void on_exit_termios_restore(int status, void *arg){
+	// no need for status but for on_exit()
+	struct termios *original_settings = (struct termios *)arg;
+	termios_restore(original_settings);
 }

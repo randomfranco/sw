@@ -4,9 +4,13 @@
 #include <string.h>
 #include <sys/time.h>
 #include <termios.h>
+#include <signal.h>
+#include <errno.h>
+
 
 #include "sw.h"
 #include "termios_helper.h"
+
 
 void print_usage(FILE *stream, char *basename){
 	fprintf(stream, "Usage: %s [-p precision in microseconds] [-s how many entries in the stops table]", basename);
@@ -34,23 +38,23 @@ int main(int argc, char *argv[]){
 				default_precision = atol(optarg);
 				if ( default_precision < 0 ){
 					fprintf(stderr, "please select a valid range of microseconds\n");
-					return EXIT_FAILURE;
+					exit(EXIT_FAILURE);
 					}
 				break;
 			case 's':
 				default_number_of_stops = atoi(optarg);
 				if ( default_number_of_stops < 0 || default_number_of_stops > 64 ){
 					fprintf(stderr, "please select a valid range of stops\n");
-					return EXIT_FAILURE;
+					exit(EXIT_FAILURE);
 					}
 				break;
 			case '?':
 				print_usage(stderr, argv[0]);
-				return EXIT_FAILURE;
+				exit(EXIT_FAILURE);
 				break;
 			case 'h':
 				print_usage(stdout, argv[0]);
-				return EXIT_SUCCESS;
+				exit(EXIT_SUCCESS);
 				break;
 
 		}
@@ -58,6 +62,7 @@ int main(int argc, char *argv[]){
 
 
 	termios_init(&original_settings);
+	on_exit(on_exit_termios_restore, (void *)&original_settings);
 
 
 	// set this using getopt
@@ -73,7 +78,6 @@ int main(int argc, char *argv[]){
 
 	sw_run(&sw);
 
-	termios_restore(&original_settings);
-
-	return EXIT_SUCCESS;
+	// exit
+	exit(EXIT_SUCCESS);
 }

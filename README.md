@@ -23,3 +23,7 @@ While running you can use the following commands:
 - `R` or `r` to reset the stopwatch
 - `<space>` to record time
 - `Q` or `q` to quit
+
+
+# TODO
+- Handler `SIGTSTP`, `SIGCONT`
