@@ -47,26 +47,6 @@ void sw_show(struct stopwatch *sw){
 	printf("\n");
 }
 
-void timeval_formatstr(struct timeval tv, char *str){
-	long min, sec, usec, cent;
-
-	sec = tv.tv_sec;
-	usec = tv.tv_usec;
-
-	if (usec < 0 ){
-		sec -= 1;
-		usec += 1000000;
-	}
-
-	min = sec / 60;
-	sec = sec % 60;
-	cent = (usec / 10000) % 100 ; // solve this absolutely
-
-	sprintf(str, "%02ld:%02ld:%02ld", min, sec, cent);
-
-}
-
-
 void sw_stop(struct stopwatch *sw){
 	sw->running = SWITCH(sw->running);
 	gettimeofday(&sw->tv, NULL);

@@ -9,6 +9,7 @@
 
 
 #include "sw.h"
+#include "format.h"
 #include "termios_helper.h"
 
 
@@ -35,7 +36,9 @@ int main(int argc, char *argv[]){
 	while((opt = getopt(argc, argv, "p:s:h")) != -1 ){
 		switch(opt){
 			case 'p':
-				default_precision = atol(optarg);
+				// this string
+//				default_precision = atol(optarg);
+				default_precision = str_formatusec(optarg);
 				if ( default_precision < 0 ){
 					fprintf(stderr, "please select a valid range of microseconds\n");
 					exit(EXIT_FAILURE);
