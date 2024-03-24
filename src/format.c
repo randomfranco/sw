@@ -6,7 +6,7 @@
 #include <unistd.h>
 #include <string.h>
 
-static int parseprecision(char *str){
+static time_unit_t parseprecision(char *str){
 	int len = strlen(str);
 
 	if (len == 0){

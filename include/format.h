@@ -4,12 +4,14 @@
 #include <sys/time.h>
 
 /* States for */
-#define NOTVALID 0
-#define MILLISECONDS 1
-#define SECONDS 2
-#define DECISECONDS 3
-#define CENTISECONDS 4
-#define MICROSECONDS 5
+typedef enum {
+	NOTVALID = 0,
+	MILLISECONDS,
+	SECONDS,
+	DECISECONDS,
+	CENTISECONDS,
+	MICROSECONDS
+} time_unit_t;
 
 #define ASCIINUMBER(c) (c >= '0' && c <= '9')
 
