@@ -49,14 +49,16 @@ static time_unit_t parseprecision(char *str){
 
 void timeval_formatstr(struct timeval tv, char *str){
 	long min, sec, usec, cent;
+	short is_usec_neg;
 
 	sec = tv.tv_sec;
 	usec = tv.tv_usec;
+	// is usec negative?
+	is_usec_neg = (usec < 0);
 
-	if (usec < 0 ){
-		sec -= 1;
-		usec += 1000000;
-	}
+	// for better perfomance, no jump (if)
+	sec -= 1 * is_usec_neg;
+	usec += 1000000 * is_usec_neg;
 
 	min = sec / 60;
 	sec = sec % 60;
